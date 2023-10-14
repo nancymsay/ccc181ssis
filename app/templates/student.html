@@ -26,36 +26,36 @@
                 <div class="modal-body">
                     <form action="{{url_for('student')}}" method="POST">
                         <div class="form-group">
-                            <label>Student ID</label>
+                            <label for="exampleFormControlInput1" class="col-form-label">Student ID</label>
                             <input type="text" name="text" class="form-control" id="exampleFormControlInput1" placeholder="2021-1234">
                         </div>
-
+                        
                         <div class="form-group">
-                            <label>First Name</label>
+                            <label for="exampleFormControlInput1" class="col-form-label">First Name</label>
                             <input type="text" name="text" class="form-control" id="exampleFormControlInput1" placeholder="Juan">
                         </div>
-
+                        
                         <div class="form-group">
-                            <label>Last Name</label>
+                            <label for="exampleFormControlInput1" class="col-form-label">Last Name</label>
                             <input type="text" name="text" class="form-control" id="exampleFormControlInput1" placeholder="Cruz">
                         </div>
-
+                        
                         <div class="form-group">
-                            <label>Course</label>
+                            <label for="exampleFormControlInput1" class="col-form-label">Course</label>
                             <input type="text" name="text" class="form-control" id="exampleFormControlInput1" placeholder="BSCS">
                         </div>
-
+                        
                         <div class="form-group">
-                            <label>Year</label>
+                            <label for="exampleFormControlInput1" class="col-form-label">Year</label>
                             <input type="text" name="text" class="form-control" id="exampleFormControlInput1" placeholder="1-4">
                         </div>
-
+                        
                         <div class="form-group">
-                            <label>Gender</label>
+                            <label for="exampleFormControlInput1" class="col-form-label">Gender</label>
                             <input type="text" name="text" class="form-control" id="exampleFormControlInput1" placeholder="F/M">
-                        </div>
+                        </div>                     
 
-                        <div class="form-group text-center"> <!-- Center the Save button -->
+                        <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary mb-2">Save</button>
                         </div>
                     </form>
@@ -64,27 +64,32 @@
         </div>
     </div>
 
-    <div class="col-sm-12" style="margin-top: 20px;">
-        <table class="table table-hover">
-            <colgroup>
-                <col style="width: 16.66%">
-                <col style="width: 16.66%">
-                <col style="width: 16.66%">
-                <col style="width: 16.66%">
-                <col style="width: 16.66%">
-                <col style="width: 16.66%">
-            </colgroup>
+    <div class="col-sm-12" style="margin-top: 20px; max-height: 400px; overflow-y: scroll; overflow-x: hidden;">
+        <div style="width: max-content;">
+            <table class="table table-hover" style="width: 100%;">
+                <colgroup>
+                    <!-- Column widths -->
+                    <col style="width: 14%">
+                    <col style="width: 16%">
+                    <col style="width: 16%">
+                    <col style="width: 16%">
+                    <col style="width: 11%">
+                    <col style="width: 11%">
+                    <col style="width: 12.5%">   
+                </colgroup>                
             <thead>
                 <tr>
-                    <th scope="col" style="text-align: center;">Student ID</th>
-                    <th scope="col" style="text-align: center;">First Name</th>
-                    <th scope="col" style="text-align: center;">Last Name</th>
-                    <th scope="col" style="text-align: center;">Course</th>
-                    <th scope="col" style="text-align: center;">Year</th>
-                    <th scope="col" style="text-align: center;">Gender</th>
+                    <th scope="col" style="text-align: left;">Student ID</th>
+                    <th scope="col" style="text-align: left;">First Name</th>
+                    <th scope="col" style="text-align: left;">Last Name</th>
+                    <th scope="col" style="text-align: left;">Course</th>
+                    <th scope="col" style="text-align: left;">Year</th>
+                    <th scope="col" style="text-align: left;">Gender</th>
+                    <th scope="col" style="text-align: left;">Actions</th>
                 </tr>
             </thead>
             <tbody>
+                <!-- Add the for loop for populating student data -->
                 {% for row in students %}
                 <tr>
                     <td>{{row.0}}</td>
@@ -92,66 +97,181 @@
                     <td>{{row.2}}</td>
                     <td>{{row.3}}</td>
                     <td>{{row.4}}</td>
+                    <td>{{row.5}}</td>
                     <td>
                         <a href="/update/{{row.0}}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modaledit{{row.0}}">Edit</a>
-                        <a href="/delete/{{ row.0 }}" onclick="return confirm('Are Sure Want To Deleted ?')" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="/delete/{{row.0}}" onclick="return confirm('Are Sure Want To Deleted ?')" class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>
-                <!--Start of Edit Student Modal -->
-                <div id="modaledit{{row.0}}" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title text-primary" style="align-content: center;">Update Student Details</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{ url_for('update')}}" method="POST">
-                                    <input type="hidden" name="id" value="{{row.0}}">
-                                    <div class="form-group">
-                                        <label>Full Name</label>
-                                        <input value="{{row.1}}" type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="Juan Cruz">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Gender</label>
-                                        <input value="{{row.2}}" type="text" name="gender" class="form-control" id="exampleFormControlInput1" placeholder="Male/Female">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Year</label>
-                                        <input value="{{row.3}}" type="text" name="year" class="form-control" id="exampleFormControlInput1" placeholder="1-4">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Course</label>
-                                        <input value="{{row.4}}" type="text" name="course" class="form-control" id="exampleFormControlInput1" placeholder="BS in Computer Science">
-                                    </div>
-                                    <div class="form-group text-center"> <!-- Center the Update button -->
-                                        <button type="submit" class="btn btn-success mb-2">Update</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End of Edit Student Modal -->
                 {% endfor %}
+
+                <!-- Static Data -->
+                <tr>
+                    <td>2023-1001</td>
+                    <td>Jane</td>
+                    <td>Smith</td>
+                    <td>Mathematics</td>
+                    <td>3</td>
+                    <td>F</td>
+                    <td>
+                        <div class="d-flex">
+                            <a href="/update/2023-1001" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1001">Edit</a>
+                            <a href="/delete/2023-1001" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>2023-1002</td>
+                    <td>Michael</td>
+                    <td>Johnson</td>
+                    <td>Physics</td>
+                    <td>2</td>
+                    <td>M</td>
+                    <td>
+                        <div class="d-flex">
+                            <a href="/update/2023-1001" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1001">Edit</a>
+                            <a href="/delete/2023-1001" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>2023-1003</td>
+                    <td>Alice</td>
+                    <td>Williams</td>
+                    <td>Chemistry</td>
+                    <td>4</td>
+                    <td>F</td>
+                    <td>
+                        <div class="d-flex">
+                            <a href="/update/2023-1001" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1001">Edit</a>
+                            <a href="/delete/2023-1001" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>2023-1004</td>
+                    <td>Robert</td>
+                    <td>Jones</td>
+                    <td>History</td>
+                    <td>1</td>
+                    <td>M</td>
+                    <td>
+                        <div class="d-flex">
+                            <a href="/update/2023-1001" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1001">Edit</a>
+                            <a href="/delete/2023-1001" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>2023-1005</td>
+                    <td>Emily</td>
+                    <td>Brown</td>
+                    <td>English</td>
+                    <td>3</td>
+                    <td>F</td>
+                    <td>
+                        <div class="d-flex">
+                            <a href="/update/2023-1001" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1001">Edit</a>
+                            <a href="/delete/2023-1001" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>2023-1001</td>
+                    <td>Jane</td>
+                    <td>Smith</td>
+                    <td>Mathematics</td>
+                    <td>3</td>
+                    <td>F</td>
+                    <td>
+                        <div class="d-flex">
+                            <a href="/update/2023-1001" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1001">Edit</a>
+                            <a href="/delete/2023-1001" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>2023-1002</td>
+                    <td>Michael</td>
+                    <td>Johnson</td>
+                    <td>Physics</td>
+                    <td>2</td>
+                    <td>M</td>
+                    <td>
+                        <div class="d-flex">
+                            <a href="/update/2023-1001" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1001">Edit</a>
+                            <a href="/delete/2023-1001" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>2023-1003</td>
+                    <td>Alice</td>
+                    <td>Williams</td>
+                    <td>Chemistry</td>
+                    <td>4</td>
+                    <td>F</td>
+                    <td>
+                        <div class="d-flex">
+                            <a href="/update/2023-1001" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1001">Edit</a>
+                            <a href="/delete/2023-1001" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>2023-1004</td>
+                    <td>Robert</td>
+                    <td>Jones</td>
+                    <td>History</td>
+                    <td>1</td>
+                    <td>M</td>
+                    <td>
+                        <div class="d-flex">
+                            <a href="/update/2023-1001" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1001">Edit</a>
+                            <a href="/delete/2023-1001" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>2023-1005</td>
+                    <td>Emily</td>
+                    <td>Brown</td>
+                    <td>English</td>
+                    <td>3</td>
+                    <td>F</td>
+                    <td>
+                        <div class="d-flex">
+                            <a href="/update/2023-1001" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1001">Edit</a>
+                            <a href="/delete/2023-1001" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+
             </tbody>
         </table>
     </div>
 </div>
 
-{% endblock %}
-
+    
 {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-success alert-dismissable" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success alert-dismissable" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
 {% endwith %}
+{% endblock %}
