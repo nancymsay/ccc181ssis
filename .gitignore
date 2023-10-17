@@ -1,2 +1,5 @@
 .vscode/*
 app/__pycache__/*
+__pycache__
+.env
+.flaskenv
