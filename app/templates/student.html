@@ -45,21 +45,33 @@
                             <label for="exampleFormControlInput1" class="col-form-label">Last Name</label>
                             <input type="text" name="lastName" class="form-control" id="exampleFormControlInput1" placeholder="Cruz">
                         </div>
-                        
+
                         <div class="form-group">
-                            <label for="exampleFormControlInput1" class="col-form-label">Course</label>
-                            <input type="text" name="course" class="form-control" id="exampleFormControlInput1" placeholder="BSCS">
+                            <label for="course">Course</label>
+                            <select name="course" class="form-control" id="course">
+                                <option value="BSCS">BSCS</option>
+                                <option value="BSECE">BSECE</option>
+                                <option value="BSIT">BSIT</option>
+                            </select>
                         </div>
                         
                         <div class="form-group">
-                            <label for="exampleFormControlInput1" class="col-form-label">Year</label>
-                            <input type="text" name="year" class="form-control" id="exampleFormControlInput1" placeholder="1-4">
+                            <label for="year">Year</label>
+                            <select name="year" class="form-control" id="year">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
                         </div>
                         
                         <div class="form-group">
-                            <label for="exampleFormControlInput1" class="col-form-label">Gender</label>
-                            <input type="text" name="gender" class="form-control" id="exampleFormControlInput1" placeholder="F/M">
-                        </div>                     
+                            <label for="gender">Gender</label>
+                            <select name="gender" class="form-control" id="gender">
+                                <option value="F">Female</option>
+                                <option value="M">Male</option>
+                            </select>
+                        </div>
 
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary mb-2">Save</button>
@@ -83,12 +95,12 @@
 
                 <div class="modal-body">
                     <!-- Form for editing student data -->
-                    <form action="/update_student" method="POST">
+                    <form action="student" method="POST">
                         <div class="form-group">
                             <label for="studentID">Student ID</label>
                             <input type="text" name="studentID" class="form-control" id="studentID" placeholder="2021-1234" required>
                         </div>
-                        
+                    
                         <div class="form-group">
                             <label for="firstName">First Name</label>
                             <input type="text" name="FirstName" class="form-control" id="firstName" placeholder="Juan" required>
@@ -101,26 +113,35 @@
 
                         <div class="form-group">
                             <label for="course">Course</label>
-                            <input type="text" name="course" class="form-control" id="course" placeholder="BSCS" required>
+                            <select name="course" class="form-control" id="course">
+                                <option value="BSCS">BSCS</option>
+                                <option value="BSECE">BSECE</option>
+                                <option value="BSIT">BSIT</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label for="year">Year</label>
-                            <input type="text" name="year" class="form-control" id="year" placeholder="1" required>
+                            <select name="year" class="form-control" id="year">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label for="gender">Gender</label>
-                            <input type="text" name="gender" class="form-control" id="gender" placeholder="M" required>
+                            <select name="gender" class="form-control" id="gender">
+                                <option value="F">Female</option>
+                                <option value="M">Male</option>
+                            </select>
                         </div>
 
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary mb-2">Update</button>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
