@@ -1,0 +1,10 @@
+
+.btn-danger {
+    background-color: #dc3545; /* Red color for the danger button */
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333; /* Darker red color on hover */
+    border-color: #bd2130;
+}

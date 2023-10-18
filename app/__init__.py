@@ -3,6 +3,7 @@ from flask_mysql_connector import MySQL
 from flask_bootstrap import Bootstrap
 from config import DB_USERNAME, DB_PASSWORD, DB_NAME, DB_HOST, SECRET_KEY, BOOTSTRAP_SERVE_LOCAL
 from flask_wtf.csrf import CSRFProtect
+from app.college.forms import college_form
 
 mysql = MySQL()
 bootstrap = Bootstrap()
@@ -22,20 +23,16 @@ def create_app(test_config=None):
     CSRFProtect(app)
 
     @app.route('/')
-    def student():
+    def home():
         return render_template("student.html")
-
-    @app.route('/course')
-    def course():
-        return render_template("course.html")
-
-    @app.route('/college')
-    def college():
-        return render_template("college.html")
-
-
-    # from .user import user_bp as user_blueprint
-    # app.register_blueprint(user_blueprint)
-
+    
+    
+    from app.college.controller import college_bp
+    from app.course.controller import course_bp
+    from app.student.controller import student_bp
+    
+    app.register_blueprint(college_bp, url_prefix='/college/')
+    app.register_blueprint(course_bp, url_prefix='/course/')
+    app.register_blueprint(student_bp, url_prefix='/student/')
 
     return app

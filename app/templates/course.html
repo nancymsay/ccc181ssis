@@ -30,7 +30,7 @@
 
                 <div class="modal-body">
                     <!-- Form for adding new course data -->
-                    <form action="{{url_for('course')}}" method="POST">
+                    <form action="{{url_for('course.index')}}" method="POST">
                         <div class="form-group">
                             <label for="exampleFormControlInput1" class="col-form-label">Code</label>
                             <input type="text" name="courseCode" class="form-control" id="exampleFormControlInput1" placeholder="BSCS">
@@ -139,19 +139,8 @@
                     <td style="text-align: center;">BS in Computer Science</td>
                     <td>
                         <div class="d-flex">
-                            <a href="/update/2023-1002" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1002">Edit</a>
-                            <a href="/delete/2023-1002" class="btn btn-danger btn-sm">Delete</a>
-                        </div>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td style="text-align: center;">BSIT</td>
-                    <td style="text-align: center;">BS in Information Technology</td>
-                    <td>
-                        <div class="d-flex">
-                            <a href="/update/2023-1004" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1004">Edit</a>
-                            <a href="/delete/2023-1004" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="{{ url_for('course.update')}}" class="btn btn-warning btn-sm mr-2">Edit</a>
+                            <a href="{{ url_for('course.delete')}}" class="btn btn-warning btn-sm">Delete</a>
                         </div>
                     </td>
                 </tr>

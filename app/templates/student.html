@@ -30,7 +30,9 @@
 
                 <div class="modal-body">
                     <!-- Form for adding new student data -->
-                    <form action="{{url_for('student')}}" method="POST">
+                     <!-- blueprint_name + . +function_name  -->
+                    <form action="{{url_for('home')}}" method="POST">
+                    <!-- <form action="{{url_for('student.index')}}" method="POST"> -->
                         <div class="form-group">
                             <label for="exampleFormControlInput1" class="col-form-label">Student ID</label>
                             <input type="text" name="studentID" class="form-control" id="exampleFormControlInput1" placeholder="2021-1234">
@@ -95,54 +97,52 @@
 
                 <div class="modal-body">
                     <!-- Form for editing student data -->
-                    <form action="student" method="POST">
-                        <div class="form-group">
-                            <label for="studentID">Student ID</label>
-                            <input type="text" name="studentID" class="form-control" id="studentID" placeholder="2021-1234" required>
-                        </div>
-                    
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" name="FirstName" class="form-control" id="firstName" placeholder="Juan" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="studentID">Student ID</label>
+                        <input type="text" name="studentID" class="form-control" id="studentID" placeholder="2021-1234" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" name="FirstName" class="form-control" id="firstName" placeholder="Juan" required>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Cruz" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Cruz" required>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="course">Course</label>
-                            <select name="course" class="form-control" id="course">
-                                <option value="BSCS">BSCS</option>
-                                <option value="BSECE">BSECE</option>
-                                <option value="BSIT">BSIT</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label for="course">Course</label>
+                        <select name="course" class="form-control" id="course">
+                            <option value="BSCS">BSCS</option>
+                            <option value="BSECE">BSECE</option>
+                            <option value="BSIT">BSIT</option>
+                        </select>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="year">Year</label>
-                            <select name="year" class="form-control" id="year">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <select name="year" class="form-control" id="year">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="gender">Gender</label>
-                            <select name="gender" class="form-control" id="gender">
-                                <option value="F">Female</option>
-                                <option value="M">Male</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select name="gender" class="form-control" id="gender">
+                            <option value="F">Female</option>
+                            <option value="M">Male</option>
+                        </select>
+                    </div>
 
-                        <div class="form-group text-center">
-                            <button type="submit" class="btn btn-primary mb-2">Update</button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary mb-2">Update</button>
+                    </div>
+                    </div>
             </div>
         </div>
     </div>
@@ -219,98 +219,8 @@
                     <td>M</td>
                     <td>
                         <div class="d-flex">
-                            <a href="/update/2023-1002" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1002">Edit</a>
-                            <a href="/delete/2023-1002" class="btn btn-danger btn-sm">Delete</a>
-                        </div>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td>2023-1004</td>
-                    <td>Robert</td>
-                    <td>Jones</td>
-                    <td>History</td>
-                    <td>1</td>
-                    <td>M</td>
-                    <td>
-                        <div class="d-flex">
-                            <a href="/update/2023-1004" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1004">Edit</a>
-                            <a href="/delete/2023-1004" class="btn btn-danger btn-sm">Delete</a>
-                        </div>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td>2023-1005</td>
-                    <td>Emily</td>
-                    <td>Brown</td>
-                    <td>English</td>
-                    <td>3</td>
-                    <td>F</td>
-                    <td>
-                        <div class="d-flex">
-                            <a href="/update/2023-1004" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1004">Edit</a>
-                            <a href="/delete/2023-1004" class="btn btn-danger btn-sm">Delete</a>
-                        </div>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>2023-1004</td>
-                    <td>Robert</td>
-                    <td>Jones</td>
-                    <td>History</td>
-                    <td>1</td>
-                    <td>M</td>
-                    <td>
-                        <div class="d-flex">
-                            <a href="/update/2023-1004" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1004">Edit</a>
-                            <a href="/delete/2023-1004" class="btn btn-danger btn-sm">Delete</a>
-                        </div>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>2023-0622</td>
-                    <td>Nancy</td>
-                    <td>Sayson</td>
-                    <td>Vetmed</td>
-                    <td>4</td>
-                    <td>F</td>
-                    <td>
-                        <div class="d-flex">
-                            <a href="/update/2023-1005" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1005">Edit</a>
-                            <a href="/delete/2023-1005" class="btn btn-danger btn-sm">Delete</a>
-                        </div>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>2023-9111</td>
-                    <td>Lyka</td>
-                    <td>Maldita</td>
-                    <td>Psychology</td>
-                    <td>3</td>
-                    <td>F</td>
-                    <td>
-                        <div class="d-flex">
-                            <a href="/update/2023-1005" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1005">Edit</a>
-                            <a href="/delete/2023-1005" class="btn btn-danger btn-sm">Delete</a>
-                        </div>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>2023-1005</td>
-                    <td>Emily</td>
-                    <td>Brown</td>
-                    <td>English</td>
-                    <td>3</td>
-                    <td>F</td>
-                    <td>
-                        <div class="d-flex">
-                            <a href="/update/2023-1005" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit2023-1005">Edit</a>
-                            <a href="/delete/2023-1005" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="{{ url_for('student.update')}}" class="btn btn-warning btn-sm mr-2">Edit</a>
+                            <a href="{{ url_for('student.delete')}}" class="btn btn-warning btn-sm">Delete</a>
                         </div>
                     </td>
                 </tr>
