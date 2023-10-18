@@ -2,4 +2,75 @@
 <title>{% block title %}Add Student{% endblock %}</title>
 
 {% block content %}
+<div class="container" style="margin-top: 40px;">
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <h1 style="display: inline-block; margin-left: 20px; margin-bottom: 40px">Add Student</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- Form for adding new student data -->
+            <form action="{{ url_for('student.add') }}" method="POST">
+                {{ student_form.csrf_token }}
+                <div class="form-group">
+                    <label for="studentID" class="col-form-label">Student ID</label>
+                    <input type="text" name="student_id" class="form-control" id="studentID" placeholder="2021-1234" required="required">
+                </div>
+
+                <div class="form-group">
+                    <label for="firstName" class="col-form-label">First Name</label>
+                    <input type="text" name="first_name" class="form-control" id="firstName" placeholder="Juan" required="required">
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName" class="col-form-label">Last Name</label>
+                    <input type="text" name="last_name" class="form-control" id="lastName" placeholder="Cruz" required="required">
+                </div>
+
+                <div class="form-group">
+                    <label for="courseCode" class="col-form-label">Course Code</label>
+                    <select class="form-control" id="courseCode" name="course_code" required>
+                        <option value="" disabled selected>--Select Course Code--</option>
+                        {% for course in courses %}
+                            <option value="{{ course.courseCode }}">{{ course.courseCode }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="year">Year</label>
+                    <select name="year" class="form-control" id="year">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select name="gender" class="form-control" id="gender">
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+                
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary mb-2">Save</button>
+                </div>
+                <p class="message-text success" id="success_message">
+                    {% if success_message %}
+                        {{ success_message }}
+                    {% endif %}
+                </p>
+                <p class="message-text error" id="error_message">
+                    {% if error_message %}
+                        {{ error_message }}
+                    {% endif %}
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
