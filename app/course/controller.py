@@ -31,7 +31,7 @@ def add():
         if result:
             success_message = "Course added successfully!"
         else:
-            error_message = "A course already exists."
+            error_message = "Course already exists."
             
     colleges = Course().get_college_codes()
     return render_template("add_course.html", course_form=form, success_message=success_message, error_message=error_message, colleges=colleges)
