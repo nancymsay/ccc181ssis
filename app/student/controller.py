@@ -8,7 +8,7 @@ student_bp = Blueprint('student', __name__)
 
 @student_bp.route("/")
 def index():
-    students = Student().all()
+    students = Student().get_student()
     return render_template("student.html", students=students)
 
 @student_bp.route('/add/', methods=['GET', 'POST'])
@@ -40,8 +40,7 @@ def add():
             error_message = "Student already exists."
             
     courses = Student().get_course_codes()
-    students = Student().get_students()
-    return render_template("add_student.html", student_form=form, success_message=success_message, error_message=error_message, courses=courses, students=students)
+    return render_template("add_student.html", student_form=form, success_message=success_message, error_message=error_message, courses=courses)
 
 @student_bp.route('/update/')
 def update():

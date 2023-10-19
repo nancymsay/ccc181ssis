@@ -54,7 +54,6 @@ def update():
     return render_template("update_college.html", collegeCode=collegeCode, collegeName=collegeName)
 
 
-
 @college_bp.route('/delete/')
 def delete():
     return render_template("delete_college.html")

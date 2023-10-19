@@ -55,23 +55,4 @@
         </div>
     </div>
 </div>
-
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-success alert-dismissable" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
-{% endwith %}
-
-<script>
-    function redirectToStudent() {
-        window.location.href = "{{ url_for('student.index') }}";
-    }
-</script>
 {% endblock %}

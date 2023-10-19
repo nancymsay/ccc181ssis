@@ -55,7 +55,7 @@ class Student(object):
         return result
     
     @classmethod
-    def get_students(cls):
+    def get_student(cls):
         cursor = mysql.connection.cursor(dictionary=True)
         sql = "SELECT * FROM student"
         cursor.execute(sql)
