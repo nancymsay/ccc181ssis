@@ -1,6 +1,11 @@
-.vscode/*
-app/__pycache__/*
-__pycache__
+.vscode
 .env
 .flaskenv
+__pycache__
+app.__pycache__
+app.college.__pycache__
+app.course.__pycache__
+app.student.__pycache__
+app.models.__pycache__
+
 
