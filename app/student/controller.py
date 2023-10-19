@@ -78,3 +78,12 @@ def update():
 @student_bp.route('/delete/')
 def delete():
     return render_template("delete_student.html")
+
+@student_bp.route('/search/', methods=['GET', 'POST'])
+def search():
+    students = []
+    if request.method == 'POST':
+        search_query = request.form.get('student_search')
+        if search_query:
+            students = Student().search(search_query)
+    return render_template('student.html', students=students)

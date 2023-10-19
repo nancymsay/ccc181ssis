@@ -49,7 +49,15 @@ class College(object):
         sql = "UPDATE college SET collegeCode = %s, collegeName = %s WHERE collegeCode = %s"
         cursor.execute(sql, (collegeCode, collegeName, originalCode))
         mysql.connection.commit()
-
+        
+    @classmethod
+    def search(cls, searchCollege):
+        search_query = "%" + searchCollege + "%"
+        cursor = mysql.connection.cursor(dictionary=True)
+        sql = "SELECT * FROM college WHERE collegeCode LIKE %s OR collegeName LIKE %s"
+        cursor.execute(sql, (search_query, search_query))
+        result = cursor.fetchall()
+        return result
 
     @classmethod
     def get_colleges(cls):

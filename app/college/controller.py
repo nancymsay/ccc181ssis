@@ -53,7 +53,15 @@ def update():
     collegeName = request.args.get('collegeName')
     return render_template("update_college.html", collegeCode=collegeCode, collegeName=collegeName)
 
-
 @college_bp.route('/delete/')
 def delete():
     return render_template("delete_college.html")
+
+@college_bp.route('/search/', methods=['GET', 'POST'])
+def search():
+    colleges = []
+    if request.method == 'POST':
+        search_query = request.form.get('college_search')
+        if search_query:
+            colleges = College().search(search_query)
+    return render_template('college.html', colleges=colleges)

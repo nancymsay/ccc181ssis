@@ -45,6 +45,17 @@ class Course(object):
         cursor.execute(sql, (courseCode, courseName, collegeCode, originalCode))
         mysql.connection.commit()
     
+
+    @classmethod
+    def search(cls, searchCourse):
+        search_query = "%" + searchCourse + "%"
+        cursor = mysql.connection.cursor(dictionary=True)
+        sql = "SELECT * FROM course WHERE courseCode LIKE %s OR courseName LIKE %s OR collegeCode LIKE %s"
+        cursor.execute(sql, (search_query, search_query, search_query))
+        result = cursor.fetchall()
+        return result
+    
+    
     @classmethod
     def get_college_codes(cls):
         cursor = mysql.connection.cursor(dictionary=True)
@@ -53,3 +64,5 @@ class Course(object):
         result = cursor.fetchall()
         cursor.close()
         return result
+    
+    

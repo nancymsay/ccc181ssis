@@ -52,11 +52,7 @@ def update():
         course.courseName = courseName
         course.collegeCode = collegeCode
         
-        course.update(courseCode, courseName, collegeCode, originalCode) 
-                      
-                      
-                      
-                      
+        course.update(courseCode, courseName, collegeCode, originalCode)               
         
         return redirect('/course/')
 
@@ -66,6 +62,17 @@ def update():
     collegeCode=request.args.get('collegeCode')
     return render_template("update_course.html", courseCode=courseCode, courseName=courseName, collegeCode=collegeCode, colleges=colleges)
 
+
 @course_bp.route('/delete/')
 def delete():
     return render_template("delete_course.html")
+
+
+@course_bp.route('/search/', methods=['GET', 'POST'])
+def search():
+    courses = []
+    if request.method == 'POST':
+        search_query = request.form.get('course_search')
+        if search_query:
+            courses = Course().search(search_query)
+    return render_template('course.html', courses=courses)

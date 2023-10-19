@@ -10,7 +10,10 @@
     </div>
     <div class="row" style="margin-bottom: 5px;">
         <div class="col-sm-8 text-left">
-            <input type="text" id="searchBar" placeholder="Search" style="display: inline-block; margin-left: 15px; width:35%;">
+            <form method="POST" action="{{ url_for('student.search')}}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="text" id="student_search" name="student_search" placeholder="Search" style="display: inline-block; margin-left: 15px; width:35%;">
+            </form>    
         </div>
         <div class="col-sm-4 text-right">
             <a href="{{ url_for('student.add')}}" class="btn btn-primary" style="display: inline-block; margin-right: 10px;">Add Student</a>
@@ -44,7 +47,7 @@
                                 <td>{{ student.year }}</td>
                                 <td>{{ student.gender }}</td>
                                 <td>                     
-                                    <form action="/student/update" method="get" style="display: inline;">
+                                    <form action="{{ url_for('student.update')}}" method="get" style="display: inline;">
                                         <input type="hidden" name="studentID" value="{{ student.studentID }}">
                                         <input type="hidden" name="firstName" value="{{ student.firstName }}">
                                         <input type="hidden" name="lastName" value="{{ student.lastName }}">

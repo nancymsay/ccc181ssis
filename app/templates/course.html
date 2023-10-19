@@ -10,7 +10,10 @@
     </div>
     <div class="row" style="margin-bottom: 5px;">
         <div class="col-sm-8 text-left">
-            <input type="text" id="searchBar" placeholder="Search" style="display: inline-block; margin-left: 15px; width:35%;">
+        <form method="POST" action="{{ url_for('course.search')}}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="text" id="course_search" name="course_search" placeholder="Search" style="display: inline-block; margin-left: 15px; width:35%;">
+        </form>
         </div>
         <div class="col-sm-4 text-right">
             <a href="{{ url_for('course.add')}}" class="btn btn-primary" style="display: inline-block; margin-right: 10px;">Add Course</a>
