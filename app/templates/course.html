@@ -47,7 +47,7 @@
                                         <input type="hidden" name="collegeCode" value="{{ course.collegeCode }}">
                                         <button class="btn btn-warning btn-sm" type="submit">Edit</button>
                                     </form>                     
-                                    <a href="{{ url_for('course.delete') }}" class="btn btn-warning btn-sm">Delete</a>
+                                    <a href="{{ url_for('course.delete') }}" class="btn btn-sm" style="background-color: red; color: white;">Delete</a>
                                 </td>
                             </tr>
                         {% endfor %}
