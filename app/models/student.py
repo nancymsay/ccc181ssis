@@ -33,17 +33,18 @@ class Student(object):
         cursor.execute(sql)
         result = cursor.fetchall()
         return result
-	
+ 
     @classmethod
-    def delete(cls, id):
+    def delete(cls, studentID):
         try:
             cursor = mysql.connection.cursor()
-            sql = f"DELETE FROM student WHERE id = {id}"
-            cursor.execute(sql)
+            sql = "DELETE FROM student WHERE studentID = %s"
+            cursor.execute(sql, (studentID,))
             mysql.connection.commit()
             return True
         except:
             return False
+
     
     @classmethod
     def update(cls, studentID, firstName, lastName, course, year, gender, originalCode):

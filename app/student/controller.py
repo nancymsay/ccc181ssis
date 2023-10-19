@@ -75,9 +75,21 @@ def update():
     courses = Student().get_course_codes()  
     return render_template("update_student.html", studentID=studentID, firstName=firstName, lastName=lastName, course=course, year=year, gender=gender, courses=courses)
 
-@student_bp.route('/delete/')
+@student_bp.route('/delete/', methods=['GET', 'POST'])
 def delete():
-    return render_template("delete_student.html")
+    if request.method == 'POST':
+        studentID = request.form.get('studentID')
+        if Student.delete(studentID):
+            return redirect('/student/')
+        else:
+            return "Failed to delete the student."
+    return render_template("student.html")
+
+@student_bp.route('/warning')
+def warning():
+    studentID = request.args.get('studentID')
+    return render_template("delete_student.html", studentID=studentID)
+
 
 @student_bp.route('/search/', methods=['GET', 'POST'])
 def search():

@@ -16,7 +16,11 @@
             </div>
            
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-danger mb-2" style="margin-right: 10px;">Confirm</button>
+                <form action="{{ url_for('student.delete') }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="studentID" value="{{ studentID }}">
+                <button type="submit" class="btn btn-warning mb-2" style="margin-right: 10px;">Confirm</button>
+                </form> 
                 <a href="{{ url_for('student.index') }}" class="btn btn-secondary mb-2">Cancel</a>
             </div>
         </div>
