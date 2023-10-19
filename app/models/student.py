@@ -38,7 +38,7 @@ class Student(object):
     def delete(cls, id):
         try:
             cursor = mysql.connection.cursor()
-            sql = f"DELETE FROM studfent WHERE id = {id}"
+            sql = f"DELETE FROM student WHERE id = {id}"
             cursor.execute(sql)
             mysql.connection.commit()
             return True
@@ -53,3 +53,4 @@ class Student(object):
         result = cursor.fetchall()
         cursor.close()
         return result
+    
