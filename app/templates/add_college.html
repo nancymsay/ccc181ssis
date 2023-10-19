@@ -12,7 +12,7 @@
         <div class="col-sm-12">
             <!-- Form for adding new college data -->
             <form action="{{ url_for('college.add') }}" method="POST">
-                {{ college_form.csrf_token }}
+                <input name="csrf_token" value="{{ csrf_token() }}" hidden />
                 <div class="form-group">
                     <label for="collegeCode" class="col-form-label">Code</label>
                     <input type="text" name="college_code" class="form-control" id="college_code" placeholder="CCS" required="required">
@@ -37,7 +37,6 @@
                 <div class="form-group text-center">
                     <button type="submit" class="btn btn-primary mb-2">Save</button>
                 </div>
-
             </form>
         </div>
     </div>

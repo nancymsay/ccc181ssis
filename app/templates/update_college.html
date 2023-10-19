@@ -2,31 +2,33 @@
 <title>{% block title %}Edit College{% endblock %}</title>
 
 {% block content %}
-<div class="container" style="margin-top: 40px;">
-    <div class="row">
-        <div class="col-sm-12 text-center">
-            <h1 style="display: inline-block; margin-left: 20px; margin-bottom: 40px">Edit College</h1>
+<form method ="POST">
+    <div class="container" style="margin-top: 40px;">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h1 style="display: inline-block; margin-left: 20px; margin-bottom: 40px">Edit College</h1>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <!-- Form for editing college data -->
-         
-            <div class="form-group">
-                <label for="collegeCode" class="col-form-label">Code</label>
-                <input type="text" class="form-control" id="collegeCode" placeholder="CCS" required="required">
-            </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- Form for editing college data -->
+                <input name="csrf_token" value="{{ csrf_token() }}" hidden />
+                <input name="originalCode" value="{{ collegeCode }}" hidden />
+                <div class="form-group">
+                    <label for="collegeCode" class="col-form-label">Code</label>
+                    <input type="text" class="form-control" name="collegeCode" id="collegeCode" placeholder="CCS",  value="{{collegeCode}}", required="required">
+                </div>
 
-            <div class="form-group">
-                <label for="collegeName" class="col-form-label">College</label>
-                <input type="text" class="form-control" id="collegeName" placeholder="College of Computer Studies" required="required">
-            </div>
-
-            <div class="form-group text-center">
-                <button type="submit" class="btn btn-primary mb-2">Update</button>
-            </div>
+                <div class="form-group">
+                    <label for="collegeName" class="col-form-label">College</label>
+                    <input type="text" class="form-control" name="collegeName" id="collegeName" placeholder="College of Computer Studies", value="{{collegeName}}", required="required">
+                </div>
             
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary mb-2">Update</button>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</form>
 {% endblock %}

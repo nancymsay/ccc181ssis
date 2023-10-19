@@ -54,3 +54,13 @@ class Student(object):
         cursor.close()
         return result
     
+    @classmethod
+    def get_students(cls):
+        cursor = mysql.connection.cursor(dictionary=True)
+        sql = "SELECT * FROM student"
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        cursor.close()
+        return result
+        
+    

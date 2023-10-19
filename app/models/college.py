@@ -2,6 +2,11 @@ from app import mysql
 
 class College(object):
 
+    def __init__(self, collegeCode=None, collegeName=None):
+        self.collegeCode = collegeCode
+        self.collegeName = collegeName
+        
+            
     def add(self):
         cursor = mysql.connection.cursor()
 
@@ -21,7 +26,6 @@ class College(object):
     @classmethod
     def all(cls):
         cursor = mysql.connection.cursor(dictionary=True)
-
         sql = "SELECT * FROM college"
         cursor.execute(sql)
         result = cursor.fetchall()
@@ -37,6 +41,15 @@ class College(object):
             return True
         except:
             return False
+        
+    @classmethod
+    def update(cls, collegeCode, collegeName, originalCode):
+        cursor = mysql.connection.cursor()
+        #check duplicate
+        sql = "UPDATE college SET collegeCode = %s, collegeName = %s WHERE collegeCode = %s"
+        cursor.execute(sql, (collegeCode, collegeName, originalCode))
+        mysql.connection.commit()
+
 
     @classmethod
     def get_colleges(cls):
@@ -45,5 +58,4 @@ class College(object):
         cursor.execute(sql)
         result = cursor.fetchall()
         cursor.close()
-        
         return result

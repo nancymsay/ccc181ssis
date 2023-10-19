@@ -40,7 +40,8 @@ def add():
             error_message = "Student already exists."
             
     courses = Student().get_course_codes()
-    return render_template("add_student.html", student_form=form, success_message=success_message, error_message=error_message, courses=courses)
+    students = Student().get_students()
+    return render_template("add_student.html", student_form=form, success_message=success_message, error_message=error_message, courses=courses, students=students)
 
 @student_bp.route('/update/')
 def update():

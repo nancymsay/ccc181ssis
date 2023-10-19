@@ -18,7 +18,7 @@ def create_app(test_config=None):
         MYSQL_HOST=DB_HOST,
         #BOOTSTRAP_SERVE_LOCAL=BOOTSTRAP_SERVE_LOCAL
     )
-    print(app.config)
+
     bootstrap.init_app(app)
     mysql.init_app(app)
     CSRFProtect(app)
