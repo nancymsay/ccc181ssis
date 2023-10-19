@@ -20,7 +20,7 @@ class College(object):
 
     @classmethod
     def all(cls):
-        cursor = mysql.connection.cursor()
+        cursor = mysql.connection.cursor(dictionary=True)
 
         sql = "SELECT * FROM college"
         cursor.execute(sql)
@@ -37,3 +37,13 @@ class College(object):
             return True
         except:
             return False
+
+    @classmethod
+    def get_colleges(cls):
+        cursor = mysql.connection.cursor(dictionary=True)
+        sql = "SELECT * FROM college"
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        cursor.close()
+        
+        return result
