@@ -1,6 +1,14 @@
 from app import mysql
 
 class Student(object):
+    
+    def __init__(self, studentID=None, firstName=None, lastName=None, course=None, year=None, gender=None):
+        self.studentID = studentID
+        self.firstName = firstName
+        self.lastName = lastName
+        self.course = course
+        self.year = year
+        self.gender = gender
 
     def add(self):
         cursor = mysql.connection.cursor()

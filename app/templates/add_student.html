@@ -30,7 +30,7 @@
 
                 <div class="form-group">
                     <label for="courseCode" class="col-form-label">Course Code</label>
-                    <select class="form-control" id="courseCode" name="course_code" required>
+                    <select class="form-control" id="courseCode" name="course" required>
                         <option value="" disabled selected>--Select Course Code--</option>
                         {% for course in courses %}
                             <option value="{{ course.courseCode }}">{{ course.courseCode }}</option>
@@ -56,19 +56,20 @@
                     </select>
                 </div>
                 
-                <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary mb-2">Save</button>
-                </div>
                 <p class="message-text success" id="success_message">
                     {% if success_message %}
-                        {{ success_message }}
+                        <span style="color: green;">{{ success_message }}</span>
                     {% endif %}
                 </p>
                 <p class="message-text error" id="error_message">
                     {% if error_message %}
-                        {{ error_message }}
+                        <span style="color: red;">{{ error_message }}</span>
                     {% endif %}
                 </p>
+                
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary mb-2">Save</button>
+                </div>
             </form>
         </div>
     </div>
