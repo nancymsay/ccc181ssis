@@ -46,6 +46,13 @@ class Student(object):
             return False
     
     @classmethod
+    def update(cls, studentID, firstName, lastName, course, year, gender, originalCode):
+        cursor = mysql.connection.cursor()
+        sql = "UPDATE student SET studentID = %s, firstName = %s, lastName = %s, course = %s, year = %s, gender = %s WHERE studentID = %s"
+        cursor.execute(sql, (studentID, firstName, lastName, course, year, gender, originalCode))
+        mysql.connection.commit()
+    
+    @classmethod
     def get_course_codes(cls):
         cursor = mysql.connection.cursor(dictionary=True)
         sql = "SELECT courseCode FROM course"
@@ -54,13 +61,5 @@ class Student(object):
         cursor.close()
         return result
     
-    @classmethod
-    def get_student(cls):
-        cursor = mysql.connection.cursor(dictionary=True)
-        sql = "SELECT * FROM student"
-        cursor.execute(sql)
-        result = cursor.fetchall()
-        cursor.close()
-        return result
-        
+    
     

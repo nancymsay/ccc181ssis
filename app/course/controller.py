@@ -3,6 +3,7 @@ from flask import Blueprint
 import app.models as models
 from app.course.forms import course_form
 from app.models.course import *
+
 	
 course_bp = Blueprint('course', __name__)
 	
@@ -36,9 +37,34 @@ def add():
     colleges = Course().get_college_codes()
     return render_template("add_course.html", course_form=form, success_message=success_message, error_message=error_message, colleges=colleges)
 
-@course_bp.route('/update/')
+@course_bp.route('/update/', methods=['GET', 'POST'])
 def update():
-    return render_template("update_course.html")
+    if request.method == 'POST':
+        courseCode = request.form.get('courseCode')
+        courseName = request.form.get('courseName')
+        collegeCode = request.form.get("collegeCode")
+        originalCode = request.form.get("originalCode")
+        
+        print(courseCode, courseName, collegeCode)
+        
+        course = Course()
+        course.courseCode = courseCode
+        course.courseName = courseName
+        course.collegeCode = collegeCode
+        
+        course.update(courseCode, courseName, collegeCode, originalCode) 
+                      
+                      
+                      
+                      
+        
+        return redirect('/course/')
+
+    colleges = Course().get_college_codes()  
+    courseCode = request.args.get('courseCode')
+    courseName = request.args.get('courseName')  
+    collegeCode=request.args.get('collegeCode')
+    return render_template("update_course.html", courseCode=courseCode, courseName=courseName, collegeCode=collegeCode, colleges=colleges)
 
 @course_bp.route('/delete/')
 def delete():

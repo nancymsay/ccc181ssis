@@ -8,7 +8,7 @@ student_bp = Blueprint('student', __name__)
 
 @student_bp.route("/")
 def index():
-    students = Student().get_student()
+    students = Student().all()
     return render_template("student.html", students=students)
 
 @student_bp.route('/add/', methods=['GET', 'POST'])
@@ -42,9 +42,38 @@ def add():
     courses = Student().get_course_codes()
     return render_template("add_student.html", student_form=form, success_message=success_message, error_message=error_message, courses=courses)
 
-@student_bp.route('/update/')
+@student_bp.route('/update/', methods=["GET", "POST"])
 def update():
-    return render_template("update_student.html")
+    if request.method == 'POST':
+        studentID = request.form.get('studentID')
+        firstName = request.form.get('firstName')
+        lastName = request.form.get('lastName')
+        course = request.form.get('course')
+        year = request.form.get('year')
+        gender = request.form.get('gender')
+        originalCode = request.form.get("originalCode")
+        
+        print(studentID, firstName, lastName, course, year, gender, originalCode)
+        
+        student = Student()
+        student.studentID = studentID
+        student.firstName = firstName
+        student.lastName = lastName
+        student.course = course
+        student.year = year
+        student.gender = gender
+        student.update(studentID, firstName, lastName, course, year, gender, originalCode)
+        
+        return redirect('/student/')
+      
+    studentID = request.args.get('studentID')
+    firstName = request.args.get('firstName')
+    lastName = request.args.get('lastName')
+    course = request.args.get('course')
+    year = request.args.get('year')
+    gender = request.args.get('gender')
+    courses = Student().get_course_codes()  
+    return render_template("update_student.html", studentID=studentID, firstName=firstName, lastName=lastName, course=course, year=year, gender=gender, courses=courses)
 
 @student_bp.route('/delete/')
 def delete():

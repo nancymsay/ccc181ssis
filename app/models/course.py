@@ -38,6 +38,14 @@ class Course(object):
             return False
     
     @classmethod
+    def update(cls, courseCode, courseName, collegeCode, originalCode):
+        cursor = mysql.connection.cursor()
+        #check duplicate
+        sql = "UPDATE course SET courseCode = %s, courseName = %s, collegeCode = %s WHERE courseCode = %s"
+        cursor.execute(sql, (courseCode, courseName, collegeCode, originalCode))
+        mysql.connection.commit()
+    
+    @classmethod
     def get_college_codes(cls):
         cursor = mysql.connection.cursor(dictionary=True)
         sql = "SELECT collegeCode FROM college"

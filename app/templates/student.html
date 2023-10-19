@@ -44,7 +44,15 @@
                                 <td>{{ student.year }}</td>
                                 <td>{{ student.gender }}</td>
                                 <td>                     
-                                    <a href="{{ url_for('student.update') }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <form action="/student/update" method="get" style="display: inline;">
+                                        <input type="hidden" name="studentID" value="{{ student.studentID }}">
+                                        <input type="hidden" name="firstName" value="{{ student.firstName }}">
+                                        <input type="hidden" name="lastName" value="{{ student.lastName }}">
+                                        <input type="hidden" name="course" value="{{ student.course }}">
+                                        <input type="hidden" name="year" value="{{ student.year }}">
+                                        <input type="hidden" name="gender" value="{{ student.gender }}">
+                                        <button class="btn btn-warning btn-sm" type="submit">Edit</button>
+                                    </form>
                                     <a href="{{ url_for('student.delete') }}" class="btn btn-warning btn-sm">Delete</a>
                                 </td>
                             </tr>

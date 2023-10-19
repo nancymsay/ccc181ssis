@@ -41,8 +41,6 @@
                                     <input type="hidden" name="collegeName" value="{{ college.collegeName }}">
                                     <button class="btn btn-warning btn-sm" type="submit">Edit</button>
                                 </form>
-        
-                                <!-- <a href="{{ url_for('college.update') }}" class="btn btn-warning btn-sm">Edit</a> -->
                                 <a href="{{ url_for('college.delete') }}" class="btn btn-warning btn-sm">Delete</a>
                             </td>
                         </tr>
@@ -53,19 +51,6 @@
         </div>
     </div>
 </div>
-
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-success alert-dismissable" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
-{% endwith %}
 
 <script>
     function redirectToCollege() {
