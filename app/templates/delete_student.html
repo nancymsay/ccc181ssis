@@ -19,9 +19,9 @@
                 <form action="{{ url_for('student.delete') }}" method="POST">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="studentID" value="{{ studentID }}">
-                <button type="submit" class="btn btn-warning mb-2" style="margin-right: 10px;">Confirm</button>
-                </form> 
+                <button type="submit" class="btn btn-secondary mb-2" style="background-color: red; color: white;">Confirm</button>
                 <a href="{{ url_for('student.index') }}" class="btn btn-secondary mb-2">Cancel</a>
+                </form> 
             </div>
         </div>
     </div>

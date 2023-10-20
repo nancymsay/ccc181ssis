@@ -13,11 +13,16 @@
             <div class="alert alert-warning" role="alert">
                 <h4 class="alert-heading">Warning!</h4>
                 <p>Are you sure you want to delete this college?</p>
+                <p>Note: Courses and Student Data under this college will be permanently deleted as well.</p>
             </div>
            
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-danger mb-2" style="margin-right: 10px;">Confirm</button>
+                <form action="{{ url_for('college.delete') }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="collegeCode" value="{{ collegeCode }}">
+                <button type="submit" class="btn btn-secondary mb-2" style="background-color: red; color: white;">Confirm</button>
                 <a href="{{ url_for('college.index') }}" class="btn btn-secondary mb-2">Cancel</a>
+                </form>
             </div>
         </div>
     </div>

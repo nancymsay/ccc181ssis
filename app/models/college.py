@@ -32,11 +32,11 @@ class College(object):
         return result
 	
     @classmethod
-    def delete(cls, id):
+    def delete(cls, collegeCode):
         try:
             cursor = mysql.connection.cursor()
-            sql = f"DELETE FROM college WHERE id = {id}"
-            cursor.execute(sql)
+            sql = "DELETE FROM college WHERE collegeCode = %s"
+            cursor.execute(sql, (collegeCode,))
             mysql.connection.commit()
             return True
         except:
