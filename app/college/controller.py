@@ -18,7 +18,7 @@ def add():
 
     if request.method == "POST":
         code = request.form.get("college_code").upper()
-        name = request.form.get("college_name").upper()
+        name = request.form.get("college_name")
 
         new_college = College()
         new_college.collegeCode = code
@@ -53,9 +53,20 @@ def update():
     collegeName = request.args.get('collegeName')
     return render_template("update_college.html", collegeCode=collegeCode, collegeName=collegeName)
 
-@college_bp.route('/delete/')
+@college_bp.route('/delete/', methods=['GET', 'POST'])
 def delete():
-    return render_template("delete_college.html")
+    if request.method == 'POST':
+        collegeCode = request.form.get('collegeCode')
+        if College.delete(collegeCode):
+            return redirect('/college/')
+        else:
+            return "Failed to delete college."
+    return render_template("college.html")
+
+@college_bp.route('/warning')
+def warning():
+    collegeCode = request.args.get('collegeCode')
+    return render_template("delete_College.html", collegeCode=collegeCode)
 
 @college_bp.route('/search/', methods=['GET', 'POST'])
 def search():

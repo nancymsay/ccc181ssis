@@ -44,7 +44,6 @@ class Student(object):
             return True
         except:
             return False
-
     
     @classmethod
     def update(cls, studentID, firstName, lastName, course, year, gender, originalCode):

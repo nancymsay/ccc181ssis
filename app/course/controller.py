@@ -20,7 +20,7 @@ def add():
 
     if request.method == "POST":
         code = request.form.get("course_code").upper()
-        name = request.form.get("course_name").upper()
+        name = request.form.get("course_name")
         collegeCode = request.form.get("college_code")
 
         new_course = Course()
@@ -63,10 +63,20 @@ def update():
     return render_template("update_course.html", courseCode=courseCode, courseName=courseName, collegeCode=collegeCode, colleges=colleges)
 
 
-@course_bp.route('/delete/')
+@course_bp.route('/delete/', methods=['GET', 'POST'])
 def delete():
+    if request.method == 'POST':
+        courseCode = request.form.get('courseCode')
+        if Course.delete(courseCode):
+            return redirect('/course/')
+        else:
+            return "Failed to delete the course."
     return render_template("delete_course.html")
 
+@course_bp.route('/warning')
+def warning():
+    courseCode = request.args.get('courseCode')
+    return render_template("delete_course.html", courseCode=courseCode)
 
 @course_bp.route('/search/', methods=['GET', 'POST'])
 def search():
