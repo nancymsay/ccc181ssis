@@ -19,8 +19,8 @@ def add():
 
     if request.method == "POST":
         studentID = request.form.get("student_id")
-        firstName = request.form.get("first_name")
-        lastName = request.form.get("last_name")
+        firstName = request.form.get("first_name").title()
+        lastName = request.form.get("last_name").title()
         course = request.form.get("course")        
         year = request.form.get("year")
         gender = request.form.get("gender")
