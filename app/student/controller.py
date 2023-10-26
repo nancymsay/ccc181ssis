@@ -91,11 +91,14 @@ def warning():
     return render_template("delete_student.html", studentID=studentID)
 
 
-@student_bp.route('/search/', methods=['GET', 'POST'])
+@student_bp.route('/search/', methods=['POST'])
 def search():
     students = []
     if request.method == 'POST':
+        search_category = request.form.get('search_category')
         search_query = request.form.get('student_search')
-        if search_query:
-            students = Student().search(search_query)
+        if not search_query and search_category == 'all':
+            students = Student.all()
+        elif search_query:
+            students = Student.search(search_category, search_query)
     return render_template('student.html', students=students)

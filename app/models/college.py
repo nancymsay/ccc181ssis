@@ -51,11 +51,15 @@ class College(object):
         mysql.connection.commit()
         
     @classmethod
-    def search(cls, searchCollege):
-        search_query = "%" + searchCollege + "%"
+    def search(cls, searchCategory, searchQuery):
+        search_query = "%" + searchQuery + "%"
         cursor = mysql.connection.cursor(dictionary=True)
-        sql = "SELECT * FROM college WHERE collegeCode LIKE %s OR collegeName LIKE %s"
-        cursor.execute(sql, (search_query, search_query))
+        if searchCategory == "all":
+            sql = "SELECT * FROM college WHERE collegeCode LIKE %s OR collegeName LIKE %s"
+            cursor.execute(sql, (search_query, search_query))
+        else:
+            sql = f"SELECT * FROM college WHERE {searchCategory} LIKE %s"
+            cursor.execute(sql, (search_query,))
         result = cursor.fetchall()
         return result
 

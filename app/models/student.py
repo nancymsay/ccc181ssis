@@ -53,11 +53,17 @@ class Student(object):
         mysql.connection.commit()
     
     @classmethod
-    def search(cls, searchStudent):
-        search_query = "%" + searchStudent + "%"
+    def search(cls, search_category, search_query):
+        search_query = "%" + search_query + "%"
         cursor = mysql.connection.cursor(dictionary=True)
-        sql = "SELECT * FROM student WHERE studentID LIKE %s OR firstName LIKE %s OR lastName LIKE %s OR course LIKE %s OR year LIKE %s OR gender LIKE %s"
-        cursor.execute(sql, (search_query, search_query, search_query, search_query, search_query, search_query))
+
+        if search_category == 'all':
+            sql = "SELECT * FROM student WHERE studentID LIKE %s OR firstName LIKE %s OR lastName LIKE %s OR course LIKE %s OR year LIKE %s OR gender LIKE %s"
+            cursor.execute(sql, (search_query, search_query, search_query, search_query, search_query, search_query))
+        else:
+            sql = f"SELECT * FROM student WHERE {search_category} LIKE %s"
+            cursor.execute(sql, (search_query,))
+
         result = cursor.fetchall()
         return result
     
@@ -69,6 +75,3 @@ class Student(object):
         result = cursor.fetchall()
         cursor.close()
         return result
-    
-    
-    

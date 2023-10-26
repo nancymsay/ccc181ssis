@@ -68,11 +68,14 @@ def warning():
     collegeCode = request.args.get('collegeCode')
     return render_template("delete_College.html", collegeCode=collegeCode)
 
-@college_bp.route('/search/', methods=['GET', 'POST'])
+@college_bp.route('/search/', methods=['POST'])
 def search():
     colleges = []
     if request.method == 'POST':
+        search_category = request.form.get('search_category')
         search_query = request.form.get('college_search')
-        if search_query:
-            colleges = College().search(search_query)
+        if not search_query and search_category == 'all':
+            colleges = College().all()
+        elif search_query:
+            colleges = College.search(search_category, search_query)
     return render_template('college.html', colleges=colleges)

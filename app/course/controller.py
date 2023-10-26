@@ -78,11 +78,14 @@ def warning():
     courseCode = request.args.get('courseCode')
     return render_template("delete_course.html", courseCode=courseCode)
 
-@course_bp.route('/search/', methods=['GET', 'POST'])
+@course_bp.route('/search/', methods=['POST'])
 def search():
     courses = []
     if request.method == 'POST':
+        search_category = request.form.get('search_category')
         search_query = request.form.get('course_search')
-        if search_query:
-            courses = Course().search(search_query)
+        if not search_query and search_category == 'all':
+            courses = Course().all()
+        elif search_query:
+            courses = Course.search(search_category, search_query)
     return render_template('course.html', courses=courses)
