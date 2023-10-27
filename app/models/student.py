@@ -2,13 +2,14 @@ from app import mysql
 
 class Student(object):
     
-    def __init__(self, studentID=None, firstName=None, lastName=None, course=None, year=None, gender=None):
+    def __init__(self, studentID=None, firstName=None, lastName=None, course=None, year=None, gender=None, college_code=None):
         self.studentID = studentID
         self.firstName = firstName
         self.lastName = lastName
         self.course = course
         self.year = year
         self.gender = gender
+        self.college_code = college_code
 
     def add(self):
         cursor = mysql.connection.cursor()
@@ -29,7 +30,12 @@ class Student(object):
     @classmethod
     def all(cls):
         cursor = mysql.connection.cursor(dictionary=True)
-        sql = "SELECT * FROM student"
+        sql = """
+        SELECT s.*, c.collegeCode as college_code 
+        FROM student s
+        INNER JOIN course c 
+        ON s.course = c.courseCode
+        """
         cursor.execute(sql)
         result = cursor.fetchall()
         return result
@@ -58,12 +64,11 @@ class Student(object):
         cursor = mysql.connection.cursor(dictionary=True)
 
         if search_category == 'all':
-            sql = "SELECT * FROM student WHERE studentID LIKE %s OR firstName LIKE %s OR lastName LIKE %s OR course LIKE %s OR year LIKE %s OR gender LIKE %s"
-            cursor.execute(sql, (search_query, search_query, search_query, search_query, search_query, search_query))
+            sql = "SELECT s.*, c.collegeCode as college_code FROM student s INNER JOIN course c ON s.course = c.courseCode WHERE s.studentID LIKE %s OR s.firstName LIKE %s OR s.lastName LIKE %s OR s.course LIKE %s OR s.year LIKE %s OR s.gender LIKE %s OR c.collegeCode LIKE %s"
+            cursor.execute(sql, (search_query, search_query, search_query, search_query, search_query, search_query, search_query))
         else:
-            sql = f"SELECT * FROM student WHERE {search_category} LIKE %s"
+            sql = f"SELECT s.*, c.collegeCode as college_code FROM student s INNER JOIN course c ON s.course = c.courseCode WHERE {search_category} LIKE %s"
             cursor.execute(sql, (search_query,))
-
         result = cursor.fetchall()
         return result
     
