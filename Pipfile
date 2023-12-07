@@ -6,9 +6,10 @@ name = "pypi"
 [packages]
 flask = "2.3.3"
 flask-mysql-connector = "*"
-flask-bootstrap = "*"
-flask-wtf = "*"
 python-dotenv = "*"
+flask-wtf = "*"
+werkzeug = "2.3.7"
+cloudinary = "*"
 
 [dev-packages]
 
