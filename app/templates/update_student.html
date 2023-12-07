@@ -2,7 +2,7 @@
 <title>{% block title %}Update Student{% endblock %}</title>
 
 {% block content %}
-<form method='POST'>
+<form method='POST' enctype="multipart/form-data">
     <div class="container" style="margin-top: 40px;">
         <div class="row">
             <div class="col-sm-12 text-center">
@@ -14,6 +14,16 @@
                 <!-- Form for editing student data -->
                 <input name="csrf_token" value="{{ csrf_token() }}" hidden />
                 <input name="originalCode" value="{{ studentID }}" hidden />
+                <input name="originalProfilePic" value="{{ profilepic }}" hidden />
+
+                <div class="form-group text-center">
+                    <label for="profile_pic" class="col-form-label" style="font-weight: bold; font-size: larger">Profile</label>
+                    <div class="d-flex justify-content-center align-items-center flex-column">
+                        <img id="profile_pic_preview" src="{{ profilepic or '/static/img/default_profilepic.png' }}" alt="Profile Picture" class="img-thumbnail" style="max-width: 200px; max-height: 200px; min-width: 200px; min-height: 200px; object-fit: contain; margin-top: 10px; margin-bottom: 10px;">
+                        <input style="margin-left: 9%;" type="file" name="profile_pic" id="profile_pic" onchange="previewProfilePic()">
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="studentID" class="col-form-label">Student ID</label>
                     <input type="text" name="studentID" class="form-control" id="studentID" value="{{studentID}}" required="required">
@@ -65,4 +75,23 @@
         </div>
     </div>
 </form>
+
+<script>
+    // Use this JavaScript function to preview the profile picture
+    function previewProfilePic() {
+        var input = document.getElementById('profile_pic');
+        var preview = document.getElementById('profile_pic_preview');
+        
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            // Use default profile picture if no file selected
+            preview.src = '/static/img/default_profilepic.png';
+        }
+    }
+</script>
 {% endblock %}
