@@ -2,7 +2,7 @@ from app import mysql
 
 class Student(object):
     
-    def __init__(self, studentID=None, firstName=None, lastName=None, course=None, year=None, gender=None, college_code=None):
+    def __init__(self, studentID=None, firstName=None, lastName=None, course=None, year=None, gender=None, college_code=None, profilepic=None):
         self.studentID = studentID
         self.firstName = firstName
         self.lastName = lastName
@@ -10,6 +10,7 @@ class Student(object):
         self.year = year
         self.gender = gender
         self.college_code = college_code
+        self.profilepic = profilepic
 
     def add(self):
         cursor = mysql.connection.cursor()
@@ -21,10 +22,16 @@ class Student(object):
         if existing_student:
             return False
 
-        sql = "INSERT INTO student(studentID, firstName, lastName, course, year, gender) VALUES(%s, %s, %s, %s, %s, %s)"
-        cursor.execute(sql, (self.studentID, self.firstName, self.lastName, self.course, self.year, self.gender))
+        # Check if a profile picture URL is provided
+        if self.profilepic:
+            sql = "INSERT INTO student(studentID, firstName, lastName, course, year, gender, profilepic) VALUES(%s, %s, %s, %s, %s, %s, %s)"
+            cursor.execute(sql, (self.studentID, self.firstName, self.lastName, self.course, self.year, self.gender, self.profilepic))
+        else:
+            # If no profile picture, insert without the profilepic column
+            sql = "INSERT INTO student(studentID, firstName, lastName, course, year, gender) VALUES(%s, %s, %s, %s, %s, %s)"
+            cursor.execute(sql, (self.studentID, self.firstName, self.lastName, self.course, self.year, self.gender))
+
         mysql.connection.commit()
-	
         return True
 
     @classmethod
@@ -43,19 +50,24 @@ class Student(object):
     @classmethod
     def delete(cls, studentID):
         try:
+            # Get the profile picture URL before deleting the student
+            profile_pic_url = cls.get_profile_pic_url(studentID)
+
             cursor = mysql.connection.cursor()
             sql = "DELETE FROM student WHERE studentID = %s"
             cursor.execute(sql, (studentID,))
             mysql.connection.commit()
-            return True
+
+            # If a profile picture exists, return the URL, otherwise, return None
+            return profile_pic_url
         except:
-            return False
+            return None
     
     @classmethod
-    def update(cls, studentID, firstName, lastName, course, year, gender, originalCode):
+    def update(cls, studentID, firstName, lastName, course, year, gender, profilepic, originalCode):
         cursor = mysql.connection.cursor()
-        sql = "UPDATE student SET studentID = %s, firstName = %s, lastName = %s, course = %s, year = %s, gender = %s WHERE studentID = %s"
-        cursor.execute(sql, (studentID, firstName, lastName, course, year, gender, originalCode))
+        sql = "UPDATE student SET studentID = %s, firstName = %s, lastName = %s, course = %s, year = %s, gender = %s, profilepic = %s WHERE studentID = %s"
+        cursor.execute(sql, (studentID, firstName, lastName, course, year, gender, profilepic, originalCode))
         mysql.connection.commit()
     
     @classmethod
@@ -80,3 +92,16 @@ class Student(object):
         result = cursor.fetchall()
         cursor.close()
         return result
+    
+    @classmethod
+    def get_profile_pic_url(cls, studentID):
+        cursor = mysql.connection.cursor()
+        sql = "SELECT profilepic FROM student WHERE studentID = %s"
+        cursor.execute(sql, (studentID,))
+        result = cursor.fetchone()
+        cursor.close()
+
+        if result:
+            return result[0]
+        else:
+            return None
